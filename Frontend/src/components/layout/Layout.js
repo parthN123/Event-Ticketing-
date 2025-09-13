@@ -7,11 +7,20 @@ import './Layout.css';
 
 const Layout = () => {
   return (
-    <Box className="layout">
+    <Box className="layout" sx={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       <Navbar />
-      <Container className="content">
-            <Outlet />
-          </Container>
+      <Box sx={{ flex: 1 }}>
+        <Container 
+          className="content" 
+          maxWidth="lg" 
+          sx={{ 
+            py: { xs: 2, sm: 3, md: 4 },
+            px: { xs: 1, sm: 2, md: 3 }
+          }}
+        >
+          <Outlet />
+        </Container>
+      </Box>
       <Footer />
     </Box>
   );

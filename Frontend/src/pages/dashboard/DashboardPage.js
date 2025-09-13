@@ -8,7 +8,6 @@ import {
   Paper,
   Card,
   CardContent,
-  CardHeader,
   List,
   ListItem,
   ListItemText,
@@ -409,7 +408,7 @@ const AdminDashboard = () => {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const { token } = useAuth();
+  // const { token } = useAuth(); // Not used in AdminDashboard
 
   useEffect(() => {
     const fetchData = async () => {

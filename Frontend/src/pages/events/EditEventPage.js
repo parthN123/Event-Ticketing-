@@ -13,7 +13,7 @@ import {
   Box,
   InputAdornment,
 } from '@mui/material';
-import { useAuth } from '../../context/AuthContext';
+// import { useAuth } from '../../context/AuthContext';
 import EventIcon from '@mui/icons-material/Event';
 import DescriptionIcon from '@mui/icons-material/Description';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
@@ -26,7 +26,7 @@ import ImageIcon from '@mui/icons-material/Image';
 const EditEventPage = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const { } = useAuth();
+  // const { } = useAuth(); // Not needed for this component
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);

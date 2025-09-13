@@ -21,6 +21,8 @@ import {
   CircularProgress,
   Alert,
   Chip,
+  useTheme,
+  useMediaQuery,
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import EventIcon from '@mui/icons-material/Event';
@@ -44,6 +46,10 @@ const EventsPage = () => {
   const [categories, setCategories] = useState([]);
   const eventsPerPage = 9;
   const [, setImageDataMap] = useState({});
+  
+  const theme = useTheme();
+  // const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const isSmallMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -181,29 +187,35 @@ const EventsPage = () => {
 
   return (
     <Container maxWidth="lg" sx={{ mt: 4 }} className="events-page-container">
-      <Typography variant="h4" component="h1" gutterBottom>
+      <Typography 
+        variant={isSmallMobile ? "h5" : "h4"} 
+        component="h1" 
+        gutterBottom
+        sx={{ textAlign: { xs: 'center', sm: 'left' }, mb: 3 }}
+      >
         Browse Events
       </Typography>
 
       {/* Filters and Search */}
-      <Grid container spacing={2} sx={{ mb: 4 }}>
+      <Grid container spacing={{ xs: 1, sm: 2 }} sx={{ mb: 4 }}>
         <Grid item xs={12} sm={6} md={4}>
           <TextField
             fullWidth
             label="Search Events"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
+            size={isSmallMobile ? "small" : "medium"}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
-                  <SearchIcon />
+                  <SearchIcon fontSize={isSmallMobile ? "small" : "medium"} />
                 </InputAdornment>
               ),
             }}
           />
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
-          <FormControl fullWidth>
+          <FormControl fullWidth size={isSmallMobile ? "small" : "medium"}>
             <InputLabel id="category-label">Category</InputLabel>
             <Select
               labelId="category-label"
@@ -219,7 +231,7 @@ const EventsPage = () => {
           </FormControl>
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
-          <FormControl fullWidth>
+          <FormControl fullWidth size={isSmallMobile ? "small" : "medium"}>
             <InputLabel id="sort-label">Sort By</InputLabel>
             <Select
               labelId="sort-label"
@@ -254,7 +266,7 @@ const EventsPage = () => {
         </Box>
       ) : (
         <>
-          <Grid container spacing={4}>
+          <Grid container spacing={{ xs: 2, sm: 3, md: 4 }}>
             {displayedEvents.map((event) => {
               const IconComponent = getCategoryIcon(event.category);
               return (
@@ -270,20 +282,25 @@ const EventsPage = () => {
                     <CardMedia
                       component="img"
                       className="event-card-image"
-                      height="140"
+                      height={isSmallMobile ? "120" : "140"}
                       image={event.image || `https://source.unsplash.com/random?${event.category}`}
                       alt={event.name}
                     />
-                    <CardContent sx={{ flexGrow: 1 }}>
+                    <CardContent sx={{ flexGrow: 1, p: { xs: 1.5, sm: 2 } }}>
                       <Chip
-                        icon={<IconComponent />}
+                        icon={<IconComponent fontSize="small" />}
                         label={event.category}
                         size="small"
                         color="primary"
                         className="event-category-chip"
-                        sx={{ mb: 1 }}
+                        sx={{ mb: 1, fontSize: { xs: '0.7rem', sm: '0.75rem' } }}
                       />
-                      <Typography gutterBottom variant="h5" component="h2">
+                      <Typography 
+                        gutterBottom 
+                        variant={isSmallMobile ? "h6" : "h5"} 
+                        component="h2"
+                        sx={{ fontSize: { xs: '1.1rem', sm: '1.25rem' }, lineHeight: 1.2 }}
+                      >
                         {event.name}
                       </Typography>
                       <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>

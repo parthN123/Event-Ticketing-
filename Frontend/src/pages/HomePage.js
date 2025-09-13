@@ -11,19 +11,9 @@ import {
   Container,
   Grid,
   Typography,
-  Paper,
-  Divider,
   Chip,
   useTheme,
   useMediaQuery,
-  Avatar,
-  TextField,
-  InputAdornment,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-  Pagination,
   CircularProgress,
   Alert,
 } from '@mui/material';
@@ -31,29 +21,20 @@ import EventIcon from '@mui/icons-material/Event';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import CategoryIcon from '@mui/icons-material/Category';
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import SportsSoccerIcon from '@mui/icons-material/SportsSoccer';
 import TheaterComedyIcon from '@mui/icons-material/TheaterComedy';
-import SearchIcon from '@mui/icons-material/Search';
 import './HomePage.css';
 
 const HomePage = () => {
   const [featuredEvents, setFeaturedEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [category, setCategory] = useState('all');
-  const [sortBy, setSortBy] = useState('date');
-  const [page, setPage] = useState(1);
-  const [categories, setCategories] = useState([]);
-  const [eventsPerPage, setEventsPerPage] = useState(9);
-  const [events, setEvents] = useState([]);
-  const [filteredEvents, setFilteredEvents] = useState([]);
-  const [imageDataMap, setImageDataMap] = useState({});
+  const [, setCategories] = useState([]);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const isSmallMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   useEffect(() => {
     const fetchFeaturedEvents = async () => {
@@ -128,11 +109,19 @@ const HomePage = () => {
   return (
     <Box className="home-page">
       <Container>
-        <Box className="hero-section">
-          <Typography variant="h1" className="title">
+        <Box className="hero-section" sx={{ textAlign: 'center', py: { xs: 4, md: 8 } }}>
+          <Typography 
+            variant={isSmallMobile ? "h3" : isMobile ? "h2" : "h1"} 
+            className="title"
+            sx={{ mb: 2, fontSize: { xs: '2rem', sm: '2.5rem', md: '3rem' } }}
+          >
             Welcome to Event Ticketing
           </Typography>
-          <Typography variant="h5" className="subtitle">
+          <Typography 
+            variant={isSmallMobile ? "h6" : "h5"} 
+            className="subtitle"
+            sx={{ mb: 4, fontSize: { xs: '1rem', sm: '1.25rem' } }}
+          >
             Discover and book tickets for the best events around you.
           </Typography>
           <Button
@@ -140,32 +129,46 @@ const HomePage = () => {
             to="/events"
             variant="contained"
             color="primary"
-            size="large"
+            size={isSmallMobile ? "medium" : "large"}
             className="cta-button"
+            sx={{ 
+              px: { xs: 3, sm: 4 },
+              py: { xs: 1.5, sm: 2 },
+              fontSize: { xs: '0.9rem', sm: '1rem' }
+            }}
           >
             Explore Events
           </Button>
         </Box>
 
         {/* Featured Events Section */}
-        <Box sx={{ mt: 8 }}>
-          <Typography variant="h4" gutterBottom className="featured-events-title">
+        <Box sx={{ mt: { xs: 4, md: 8 } }}>
+          <Typography 
+            variant={isSmallMobile ? "h5" : "h4"} 
+            gutterBottom 
+            className="featured-events-title"
+            sx={{ textAlign: 'center', mb: 4, fontSize: { xs: '1.5rem', sm: '2rem' } }}
+          >
             Featured Events
           </Typography>
           {loading ? (
-            <Typography>Loading events...</Typography>
+            <Box sx={{ display: 'flex', justifyContent: 'center', py: 4 }}>
+              <CircularProgress />
+            </Box>
           ) : error ? (
-            <Typography color="error">{error}</Typography>
+            <Alert severity="error" sx={{ textAlign: 'center' }}>
+              {error}
+            </Alert>
           ) : featuredEvents.length > 0 ? (
-            <Grid container spacing={3}>
+            <Grid container spacing={{ xs: 2, sm: 3 }}>
               {featuredEvents.map((event) => {
                 const IconComponent = getCategoryIcon(event.category);
                 return (
                   <Grid item key={event._id} xs={12} sm={6} md={4}>
-                    <Card className="event-card">
+                    <Card className="event-card" sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
                       <CardMedia
                         component="img"
-                        height="140"
+                        height={isSmallMobile ? "120" : "140"}
                         image={event.image || `https://source.unsplash.com/random?${event.category}`}
                         alt={event.name}
                       />

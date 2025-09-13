@@ -15,6 +15,8 @@ import {
   CircularProgress,
   Alert,
   Paper,
+  useTheme,
+  useMediaQuery,
 } from '@mui/material';
 import EventIcon from '@mui/icons-material/Event';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
@@ -28,6 +30,10 @@ const TicketDetailsPage = () => {
   const [ticket, setTicket] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const isSmallMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   useEffect(() => {
     const fetchTicket = async () => {
@@ -147,33 +153,65 @@ const TicketDetailsPage = () => {
           </Alert>
         )}
         
-        <Grid container spacing={3}>
+        <Grid container spacing={{ xs: 2, md: 3 }}>
           {/* Ticket QR Code */}
           <Grid item xs={12} md={4}>
-            <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', p: 2 }}>
+            <Card sx={{ 
+              height: '100%', 
+              display: 'flex', 
+              flexDirection: 'column', 
+              alignItems: 'center', 
+              p: { xs: 1.5, sm: 2 },
+              textAlign: 'center'
+            }}>
               {ticket && ticket._id ? (
-                <QRCode
-                  value={generateQRValue()}
-                  size={Math.min(window.innerWidth * 0.3, 200)}
-                  level="H"
-                  style={{
-                    height: 'auto',
-                    maxWidth: '100%',
-                    width: '100%',
-                    padding: '16px',
-                    backgroundColor: 'white'
-                  }}
-                />
+                <Box sx={{ 
+                  display: 'flex', 
+                  justifyContent: 'center', 
+                  alignItems: 'center',
+                  mb: 2,
+                  p: 1,
+                  backgroundColor: 'white',
+                  borderRadius: 1
+                }}>
+                  <QRCode
+                    value={generateQRValue()}
+                    size={isSmallMobile ? 150 : isMobile ? 180 : Math.min(window.innerWidth * 0.3, 200)}
+                    level="H"
+                    style={{
+                      height: 'auto',
+                      maxWidth: '100%',
+                      width: '100%'
+                    }}
+                  />
+                </Box>
               ) : (
                 <Typography variant="body2" color="text.secondary" align="center">
                   QR Code not available or ticket ID is missing.
                 </Typography>
               )}
-              <Typography variant="body2" color="text.secondary" align="center" sx={{ mt: 2 }}>
+              <Typography 
+                variant="body2" 
+                color="text.secondary" 
+                align="center" 
+                sx={{ 
+                  mt: 1, 
+                  fontSize: { xs: '0.8rem', sm: '0.875rem' },
+                  px: 1
+                }}
+              >
                 Scan this QR code at the event entrance
               </Typography>
-              <Typography variant="h6" align="center" sx={{ mt: 2 }}>
-                Ticket ID: {ticket._id.substring(0, 8)}
+              <Typography 
+                variant={isSmallMobile ? "body1" : "h6"} 
+                align="center" 
+                sx={{ 
+                  mt: 1,
+                  fontSize: { xs: '0.9rem', sm: '1.25rem' },
+                  fontWeight: 'bold'
+                }}
+              >
+                Ticket ID: {ticket?._id?.substring(0, 8) || 'N/A'}
               </Typography>
             </Card>
           </Grid>
@@ -181,48 +219,94 @@ const TicketDetailsPage = () => {
           {/* Ticket Details */}
           <Grid item xs={12} md={8}>
             <Card sx={{ height: '100%' }}>
-              <CardContent>
-                <Typography variant="h5" gutterBottom>
+              <CardContent sx={{ p: { xs: 2, sm: 3 } }}>
+                <Typography 
+                  variant={isSmallMobile ? "h6" : "h5"} 
+                  gutterBottom
+                  sx={{ 
+                    fontSize: { xs: '1.25rem', sm: '1.5rem' },
+                    lineHeight: 1.2,
+                    mb: 2
+                  }}
+                >
                   {ticket.event.name}
                 </Typography>
                 
                 <Divider sx={{ my: 2 }} />
                 
-                <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                  <EventIcon sx={{ mr: 1 }} />
-                  <Typography variant="body1">
-                    <strong>Date:</strong> {formatDate(ticket.event.date)}
-                  </Typography>
+                <Box sx={{ 
+                  display: 'flex', 
+                  alignItems: { xs: 'flex-start', sm: 'center' }, 
+                  mb: 2,
+                  flexDirection: { xs: 'column', sm: 'row' }
+                }}>
+                  <Box sx={{ display: 'flex', alignItems: 'center', mb: { xs: 0.5, sm: 0 } }}>
+                    <EventIcon sx={{ mr: 1, fontSize: { xs: '1.2rem', sm: '1.5rem' } }} />
+                    <Typography variant="body1" sx={{ fontSize: { xs: '0.9rem', sm: '1rem' } }}>
+                      <strong>Date:</strong> {formatDate(ticket.event.date)}
+                    </Typography>
+                  </Box>
                 </Box>
                 
-                <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                  <AccessTimeIcon sx={{ mr: 1 }} />
-                  <Typography variant="body1">
-                    <strong>Time:</strong> {ticket.event.time}
-                  </Typography>
+                <Box sx={{ 
+                  display: 'flex', 
+                  alignItems: { xs: 'flex-start', sm: 'center' }, 
+                  mb: 2,
+                  flexDirection: { xs: 'column', sm: 'row' }
+                }}>
+                  <Box sx={{ display: 'flex', alignItems: 'center', mb: { xs: 0.5, sm: 0 } }}>
+                    <AccessTimeIcon sx={{ mr: 1, fontSize: { xs: '1.2rem', sm: '1.5rem' } }} />
+                    <Typography variant="body1" sx={{ fontSize: { xs: '0.9rem', sm: '1rem' } }}>
+                      <strong>Time:</strong> {ticket.event.time}
+                    </Typography>
+                  </Box>
                 </Box>
                 
-                <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                  <LocationOnIcon sx={{ mr: 1 }} />
-                  <Typography variant="body1">
-                    <strong>Location:</strong> {ticket.event.location}
-                  </Typography>
+                <Box sx={{ 
+                  display: 'flex', 
+                  alignItems: { xs: 'flex-start', sm: 'center' }, 
+                  mb: 2,
+                  flexDirection: { xs: 'column', sm: 'row' }
+                }}>
+                  <Box sx={{ display: 'flex', alignItems: 'center', mb: { xs: 0.5, sm: 0 } }}>
+                    <LocationOnIcon sx={{ mr: 1, fontSize: { xs: '1.2rem', sm: '1.5rem' } }} />
+                    <Typography variant="body1" sx={{ fontSize: { xs: '0.9rem', sm: '1rem' } }}>
+                      <strong>Location:</strong> {ticket.event.location}
+                    </Typography>
+                  </Box>
                 </Box>
                 
-                <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                  <ConfirmationNumberIcon sx={{ mr: 1 }} />
-                  <Typography variant="body1">
-                    <strong>Seats:</strong> {ticket.seats}
-                  </Typography>
+                <Box sx={{ 
+                  display: 'flex', 
+                  alignItems: { xs: 'flex-start', sm: 'center' }, 
+                  mb: 2,
+                  flexDirection: { xs: 'column', sm: 'row' }
+                }}>
+                  <Box sx={{ display: 'flex', alignItems: 'center', mb: { xs: 0.5, sm: 0 } }}>
+                    <ConfirmationNumberIcon sx={{ mr: 1, fontSize: { xs: '1.2rem', sm: '1.5rem' } }} />
+                    <Typography variant="body1" sx={{ fontSize: { xs: '0.9rem', sm: '1rem' } }}>
+                      <strong>Seats:</strong> {ticket.seats}
+                    </Typography>
+                  </Box>
                 </Box>
                 
                 <Divider sx={{ my: 2 }} />
                 
                 <Box>
-                  <Typography variant="body1">
+                  <Typography variant="body1" sx={{ 
+                    fontSize: { xs: '0.9rem', sm: '1rem' },
+                    mb: 1
+                  }}>
                     <strong>Purchase Date:</strong> {formatPurchaseDate(ticket.createdAt)}
                   </Typography>
-                  <Typography variant="h6" color="primary">
+                  <Typography 
+                    variant={isSmallMobile ? "body1" : "h6"} 
+                    color="primary"
+                    sx={{ 
+                      fontSize: { xs: '1rem', sm: '1.25rem' },
+                      fontWeight: 'bold'
+                    }}
+                  >
                     <strong>Total Amount:</strong> ${(ticket.event.ticketPrice * ticket.seats).toFixed(2)}
                   </Typography>
                 </Box>
