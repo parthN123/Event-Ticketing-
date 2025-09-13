@@ -26,6 +26,7 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
 import CategoryIcon from '@mui/icons-material/Category';
 import { useAuth } from '../../context/AuthContext';
+import { getEventImageUrl } from '../../utils/imageUtils';
 
 const EventDetailsPage = () => {
   const { id } = useParams();
@@ -161,7 +162,7 @@ const EventDetailsPage = () => {
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'center',
-          backgroundImage: `url(${event?.image || `https://source.unsplash.com/random?${event?.category}`})`,
+          backgroundImage: `url(${getEventImageUrl(event)})`,
           height: '400px',
           display: 'flex',
           alignItems: 'center',

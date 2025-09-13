@@ -25,6 +25,7 @@ import CategoryIcon from '@mui/icons-material/Category';
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import SportsSoccerIcon from '@mui/icons-material/SportsSoccer';
 import TheaterComedyIcon from '@mui/icons-material/TheaterComedy';
+import EventImage from '../components/common/EventImage';
 import './HomePage.css';
 
 const HomePage = () => {
@@ -166,10 +167,9 @@ const HomePage = () => {
                 return (
                   <Grid item key={event._id} xs={12} sm={6} md={4}>
                     <Card className="event-card" sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-                      <CardMedia
-                        component="img"
-                        height={isSmallMobile ? "120" : "140"}
-                        image={event.image || `https://source.unsplash.com/random?${event.category}`}
+                      <EventImage
+                        event={event}
+                        height={isSmallMobile ? 120 : 140}
                         alt={event.name}
                       />
                       <CardContent>

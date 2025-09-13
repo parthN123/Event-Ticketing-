@@ -45,6 +45,7 @@ import {
 } from '@mui/icons-material';
 import { motion } from 'framer-motion';
 import AnimatedElement from '../components/animations/AnimatedElement';
+import EventImage from '../components/common/EventImage';
 import heroPattern from '../assets/images/backgrounds/hero-pattern.svg';
 
 const Events = () => {
@@ -445,10 +446,9 @@ const Events = () => {
                         overflow: 'hidden',
                       }}
                     >
-                      <CardMedia
-                        component="img"
-                        height="180"
-                        image={`https://source.unsplash.com/random?${event.category}&sig=${event._id}`}
+                      <EventImage
+                        event={event}
+                        height={180}
                         alt={event.name}
                       />
                       <CardContent sx={{ flexGrow: 1 }}>
