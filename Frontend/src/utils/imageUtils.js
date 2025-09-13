@@ -2,9 +2,9 @@
 
 // GitHub-hosted event images as fallbacks
 const GITHUB_IMAGES = {
-  'event1': 'https://github.com/parthN123/Event-Ticketing-/blob/master/Backend/uploads/events/1749537852441-event1.png?raw=true',
-  'event2': 'https://github.com/parthN123/Event-Ticketing-/blob/master/Backend/uploads/events/1749539630950-event%202.png?raw=true',
-  'event3': 'https://github.com/parthN123/Event-Ticketing-/blob/master/Backend/uploads/events/1749539807861-event3.webp?raw=true'
+  'event1': 'https://raw.githubusercontent.com/parthN123/Event-Ticketing-/master/Backend/uploads/events/1749537852441-event1.png',
+  'event2': 'https://raw.githubusercontent.com/parthN123/Event-Ticketing-/master/Backend/uploads/events/1749539630950-event%202.png',
+  'event3': 'https://raw.githubusercontent.com/parthN123/Event-Ticketing-/master/Backend/uploads/events/1749539807861-event3.webp'
 };
 
 // Default fallback images by category
