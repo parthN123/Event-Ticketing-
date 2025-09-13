@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Create axios instance with default config
 const api = axios.create({
-  baseURL: 'http://localhost:5001/api',
+  baseURL: 'https://event-ticketing-c8e8.onrender.com/api',
   headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json'
