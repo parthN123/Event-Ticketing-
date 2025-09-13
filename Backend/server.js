@@ -44,20 +44,35 @@ const allowedOrigins = [
   'http://localhost:3000', // Local development
   'https://event-ticketing-o6r7.vercel.app', // Vercel deployment
   'https://event-ticketing-frontend.vercel.app', // Alternative Vercel URL
-  'https://event-ticketing.vercel.app' // Another possible Vercel URL
+  'https://event-ticketing.vercel.app', // Another possible Vercel URL
+  'https://*.vercel.app' // Allow any Vercel subdomain
 ];
 
 app.use(cors({
   origin: function (origin, callback) {
-    // Allow requests with no origin (like mobile apps or curl requests)
-    if (!origin) return callback(null, true);
+    console.log('CORS request from origin:', origin);
     
-    if (allowedOrigins.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      console.log('CORS blocked origin:', origin);
-      callback(new Error('Not allowed by CORS'));
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) {
+      console.log('CORS: Allowing request with no origin');
+      return callback(null, true);
     }
+    
+    // Check if origin is in allowed list
+    if (allowedOrigins.includes(origin)) {
+      console.log('CORS: Allowing origin:', origin);
+      return callback(null, true);
+    }
+    
+    // Check if origin matches Vercel pattern
+    if (origin.includes('.vercel.app')) {
+      console.log('CORS: Allowing Vercel origin:', origin);
+      return callback(null, true);
+    }
+    
+    console.log('CORS: Blocking origin:', origin);
+    console.log('CORS: Allowed origins:', allowedOrigins);
+    callback(new Error('Not allowed by CORS'));
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
