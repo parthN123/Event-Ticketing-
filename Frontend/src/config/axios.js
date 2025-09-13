@@ -1,8 +1,8 @@
-import axios from 'axios';
+              import axios from 'axios';
 
 // Create axios instance with default config
 const api = axios.create({
-  baseURL: 'https://event-ticketing-c8e8.onrender.com/api',
+  baseURL: process.env.REACT_APP_API_URL ? `${process.env.REACT_APP_API_URL}/api` : 'https://event-ticketing-c8e8.onrender.com/api',
   headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json'

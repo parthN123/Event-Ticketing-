@@ -4,8 +4,6 @@ import api from '../../config/axios';
 import {
   Box,
   Button,
-  Card,
-  CardContent,
   Container,
   Grid,
   Typography,
@@ -26,14 +24,13 @@ import EventIcon from '@mui/icons-material/Event';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
-import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import CategoryIcon from '@mui/icons-material/Category';
 import { useAuth } from '../../context/AuthContext';
 
 const EventDetailsPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { isAuthenticated, user, token } = useAuth();
+  const { isAuthenticated, user } = useAuth();
   
   const [event, setEvent] = useState(null);
   const [loading, setLoading] = useState(true);

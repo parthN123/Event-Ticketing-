@@ -11,7 +11,6 @@ import {
   MenuItem,
   Alert,
   Box,
-  IconButton,
   InputAdornment,
 } from '@mui/material';
 import { useAuth } from '../../context/AuthContext';

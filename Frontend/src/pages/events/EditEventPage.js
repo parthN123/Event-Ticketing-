@@ -26,7 +26,7 @@ import ImageIcon from '@mui/icons-material/Image';
 const EditEventPage = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const { user } = useAuth();
+  const { } = useAuth();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);

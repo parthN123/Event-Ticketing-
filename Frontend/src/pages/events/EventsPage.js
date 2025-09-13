@@ -43,7 +43,7 @@ const EventsPage = () => {
   const [page, setPage] = useState(1);
   const [categories, setCategories] = useState([]);
   const eventsPerPage = 9;
-  const [imageDataMap, setImageDataMap] = useState({});
+  const [, setImageDataMap] = useState({});
 
   useEffect(() => {
     const fetchEvents = async () => {

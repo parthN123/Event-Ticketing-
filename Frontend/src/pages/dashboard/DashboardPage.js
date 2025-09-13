@@ -31,7 +31,6 @@ import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
 import PeopleIcon from '@mui/icons-material/People';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import { useAuth } from '../../context/AuthContext';
-import ParticleBackground from '../../components/ParticleBackground';
 import './DashboardPage.css';
 
 const defaultAvatar = 'https://ui-avatars.com/api/?background=random';

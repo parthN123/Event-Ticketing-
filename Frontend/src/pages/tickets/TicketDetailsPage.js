@@ -15,7 +15,6 @@ import {
   CircularProgress,
   Alert,
   Paper,
-  Chip,
 } from '@mui/material';
 import EventIcon from '@mui/icons-material/Event';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
