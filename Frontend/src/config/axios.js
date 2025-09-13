@@ -28,6 +28,13 @@ api.interceptors.request.use(
 api.interceptors.response.use(
   (response) => response,
   (error) => {
+    // Handle CORS errors
+    if (error.code === 'ERR_NETWORK' || error.message.includes('CORS')) {
+      console.error('CORS Error: Backend may not be configured for this domain');
+      console.error('Current origin:', window.location.origin);
+      console.error('Backend URL:', api.defaults.baseURL);
+    }
+    
     if (error.response?.status === 401) {
       localStorage.removeItem('token');
       window.location.href = '/login';
