@@ -1,0 +1,52 @@
+/* Fade In Animation */
+.fadeIn-enter {
+  opacity: 0;
+}
+.fadeIn-enter-active {
+  opacity: 1;
+  transition: opacity 0.5s ease-in;
+}
+
+/* Slide Up Animation */
+.slideUp-enter {
+  opacity: 0;
+  transform: translateY(50px);
+}
+.slideUp-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.5s ease-in, transform 0.5s ease-out;
+}
+
+/* Slide In Animation */
+.slideIn-enter {
+  opacity: 0;
+  transform: translateX(-50px);
+}
+.slideIn-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 0.5s ease-in, transform 0.5s ease-out;
+}
+
+/* Scale Animation */
+.scale-enter {
+  opacity: 0;
+  transform: scale(0.8);
+}
+.scale-enter-active {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 0.5s ease-in, transform 0.5s ease-out;
+}
+
+/* Bounce Animation */
+.bounce-enter {
+  opacity: 0;
+  transform: translateY(50px);
+}
+.bounce-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.5s ease-in, transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+} 

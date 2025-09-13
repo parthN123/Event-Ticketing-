@@ -1,0 +1,19 @@
+.contact-page {
+  padding: 20px;
+}
+
+.contact-page .title {
+  margin-bottom: 20px;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.submit-button {
+  margin-top: 10px;
+} 

@@ -1,0 +1,106 @@
+/* Frontend/src/pages/events/EventsPage.css */
+
+/* Event Card Entry Animation */
+.event-card-item {
+  animation: fadeInSlideUp 0.5s ease-out;
+}
+
+@keyframes fadeInSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Event Card Hover Effect */
+.event-card-hover {
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, border-color 0.3s ease-in-out;
+  border: 2px solid transparent; /* Make border slightly thicker for better visibility */
+  border-radius: 8px; /* Match card border radius */
+  overflow: hidden; /* Ensure border radius clips content */
+  background-color: #ffffff; /* Ensure card has a white background */
+  margin-bottom: 16px; /* Add margin to separate cards visually and let background show */
+}
+
+.event-card-hover:hover {
+  transform: translateY(-8px); /* Lift the card more on hover */
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4); /* Increase shadow size and intensity */
+  border-color: #e91e63; /* Use a vibrant pink color for border on hover */
+}
+
+/* Page Background Styling */
+.events-page-container {
+  /* Use a vibrant gradient or image */
+  /* background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); */ /* Vibrant pink/orange gradient */
+  
+  /* Use a colorful image: */
+  background-image: url('https://source.unsplash.com/random/1920x1080/?colorful,abstract,event,party'); /* More colorful image keywords */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  position: relative; /* Needed for the overlay */
+  z-index: 1; /* Ensure content is above overlay */
+}
+
+/* Optional: Add an overlay to the background if using an image */
+.events-page-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.3); /* Darker overlay for better contrast */
+  z-index: -1; /* Place overlay behind the content */
+}
+
+/* Keyframes for background gradient animation (keep if you switch back to gradient) */
+/*
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+*/
+
+/* Styles for the event image within the card */
+.event-card-image {
+  height: 200px; /* Increase image height for more visual impact */
+  object-fit: cover;
+  width: 100%; /* Ensure image takes full width */
+}
+
+/* Styles for colorful category chip */
+.event-category-chip {
+  font-weight: bold;
+  /* Consider adding specific background colors for different categories here or in JS */
+  /* Example: */
+  /*
+  &.music { background-color: #ff4081; color: white; }
+  &.sports { background-color: #2979ff; color: white; }
+  */
+}
+
+/* Add some margin to the event details in the card content */
+.event-details-text {
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.event-details-text svg {
+  margin-right: 8px;
+} 

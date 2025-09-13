@@ -1,0 +1,20 @@
+.navbar {
+  background: linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%);
+}
+
+.logo {
+  text-decoration: none;
+  color: white;
+  font-weight: 700;
+  flex-grow: 1;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: white;
+} 

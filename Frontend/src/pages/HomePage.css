@@ -1,0 +1,101 @@
+.home-page {
+  /* min-height: 100vh; */
+  background: linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%);
+  color: white;
+  /* display: flex; */
+  /* align-items: center; */
+  /* justify-content: center; */
+  background-size: 200% 200%; /* Increase size to allow for animation */
+  animation: gradientAnimation 10s ease infinite; /* Apply gradient animation */
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.hero-section {
+  text-align: center;
+  animation: fadeIn 0.5s ease-in;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  animation: slideDown 0.5s ease-out;
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  animation: slideUp 0.5s ease-out;
+}
+
+.cta-button {
+  animation: bounce 0.5s ease-out;
+}
+
+/* Featured Event Card Hover Effect */
+.event-card {
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, border-color 0.3s ease-in-out;
+    border: 1px solid transparent; /* Add a transparent border */
+}
+
+.event-card:hover {
+    transform: translateY(-5px); /* Lift the card slightly */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Add a stronger shadow */
+    border-color: #FF8E53; /* Add a colorful border */
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes bounce {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+} 
